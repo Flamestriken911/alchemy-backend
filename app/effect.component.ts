@@ -27,8 +27,4 @@ import {Effect} from './effect'
 
 export class EffectComponent {
     @Input() effect: Effect;
-
-    toggleDiscover(): void {
-        this.effect.isDiscovered = !this.effect.isDiscovered;
-    }
 }

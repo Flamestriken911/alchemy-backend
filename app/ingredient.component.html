@@ -1,7 +1,7 @@
 <div class="ingredient">
     <h3>{{ingredient.name}}</h3>
-    <effect [effect]="effect" 
-        (click)="updateDiscovery(effect)"
+    <effect [ingredient]="ingredient"
+        [effect]="effect" 
         *ngFor="let effect of ingredient.effects">
             {{effect}}
     </effect>

@@ -8,7 +8,7 @@ import {IngredientService} from './ingredient.service'
 @Component({
     selector: 'effect',
     template: ` <div [class.discovered]="effect.isDiscovered"
-                (click)="updateDiscovery(effect)">
+                (click)="updateDiscovery(effect); $event.stopPropagation()">
                     {{effect.name}}
                 </div>`,
     styles: [

@@ -25,12 +25,23 @@ export class AppComponent implements OnInit {
   name = 'Angular'; 
   ingredients: Ingredient[];
   mixtureIngredients: Ingredient[] = [];
+  mixtureEffects: string[] = [];
 
   constructor(private ingredientService: IngredientService) {}
 
   selectIngredient(ingredient: Ingredient){
     if(this.mixtureIngredients.length < 3){
-      this.mixtureIngredients.push(ingredient);
+      //Update the coloration of the ingredients in the mixture based on what the user is adding
+      for(var i=0; i<this.mixtureIngredients.length; i++) {
+        this.mixtureIngredients[i].effects.forEach((effect) => {
+          if(ingredient.effects.some((newEffect) => newEffect.name === effect.name)) {
+            if(!effect.willHaveEffect) this.mixtureEffects.push(effect.name);
+            effect.willHaveEffect = true;
+            effect.willBeDiscovered = !effect.isDiscovered ? true : false;
+          }
+        })
+      }
+      this.mixtureIngredients.push(ingredient); //The added ingredient will already have the correct properties
       this.getMatches();
     }
   }
@@ -41,11 +52,8 @@ export class AppComponent implements OnInit {
 
   //Gets matches for ingredients in mixture (returns default list if mixture empty)
   getMatches = () => {
-    var ingredientArray: [Ingredient[]];
     this.ingredientService.getMatches(this.mixtureIngredients)
-      .then(ingredients => ingredientArray = ingredients)
-      .then(() => this.mixtureIngredients = ingredientArray[0])
-      .then(() => this.ingredients = ingredientArray[1]);
+      .then(ingredients => this.ingredients = ingredients);
 }
 
   ngOnInit(): void {

@@ -19,28 +19,25 @@ export class IngredientService {
                     .catch(this.handleError);
     }
 
-    getMatches(ingredients: Ingredient[]): Promise<[Ingredient[]]> {
+    getMatches(ingredients: Ingredient[]): Promise<Ingredient[]> {
         //the request url will have querystring parameters of the ingredient ids
         // const url = `${this.ingredientsUrl}/get-matches?${ingredients.map((ing) => ing.id).join('&')}`;
         return this.http.get(this.ingredientsUrl)
                     .toPromise()
                     .then(response => response.json().data as Ingredient[])
                     //TODO: Remove once we have an actual back-end that does this filtering for us
-                    .then(response => [
-                        response.filter(
-                        (ing) => ingredients.map(
-                            (ingredient) => ingredient.id
-                        ).some((id) => id === ing.id)),
+                    .then(response => 
                         response.filter(
                         (ing) => !ingredients.map(
                             (ingredient) => ingredient.id
                         ).some((id) => id === ing.id))
-                    ])
+                    )
                     .catch(this.handleError);
     }
 
     updateEffectDiscovery(ingredient: Ingredient, effectName: string, value: boolean): Promise<Ingredient> {
         const url = `${this.ingredientsUrl}/${ingredient.id}`;
+        //TODO: remove part below once we have a real server
         ingredient.effects[ingredient.effects.findIndex(ef => ef.name === effectName)].isDiscovered = value;
         var newIngredient: Ingredient = {
             name: ingredient.name, 
@@ -51,6 +48,15 @@ export class IngredientService {
             .put(url, JSON.stringify(newIngredient), {headers: this.headers})
             .toPromise()
             .then(() => ingredient)
+            .catch(this.handleError);
+    }
+
+    saveMixtureCreation(ingredientIds: number[]): Promise<null>{
+        const url = `${this.ingredientsUrl}/create-mixture`;
+        return this.http
+            .post(url, JSON.stringify(ingredientIds), {headers: this.headers})
+            .toPromise()
+            .then(() => ingredientIds)
             .catch(this.handleError);
     }
 

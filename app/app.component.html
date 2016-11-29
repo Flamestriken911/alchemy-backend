@@ -1,7 +1,9 @@
 <mixture [ingredients]="mixtureIngredients" [deselectAction]="getMatches"></mixture>
 <hr>
-<div *ngIf="mixtureIngredients.length > 1">
+<div class="mixture-info" *ngIf="mixtureIngredients.length > 1">
     The mixture has the following effects so far: {{mixtureEffects.join(', ')}}
+    <br>
+    <button class="mixture-button" (click)="createMixture()">Create</button>
     <hr>
 </div>
 <div class="ingredient-wrapper" *ngFor="let ingredient of ingredients">

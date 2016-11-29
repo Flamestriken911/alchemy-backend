@@ -17,6 +17,12 @@ import {IngredientService} from './ingredient.service';
     .selected {
       display: none;
     }
+    .mixture-info {
+      text-align: center;
+    }
+    .mixture-button {
+      margin-top: 1%;
+    }
     `
   ]
 })
@@ -55,6 +61,13 @@ export class AppComponent implements OnInit {
     this.ingredientService.getMatches(this.mixtureIngredients)
       .then(ingredients => this.ingredients = ingredients);
 }
+
+  createMixture(): void {
+    this.ingredientService.saveMixtureCreation(this.mixtureIngredients.map((ing) => ing.id));
+    this.mixtureIngredients = [];
+    this.mixtureEffects = [];
+    this.getIngredients();
+  }
 
   ngOnInit(): void {
     this.getIngredients();

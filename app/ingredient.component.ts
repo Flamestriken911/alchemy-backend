@@ -13,7 +13,7 @@ import {IngredientService} from './ingredient.service';
                     border-radius: 25px;
                     border: 2px solid black;
                     text-align: center;
-                    width: 40%;
+                    width: 100%;
                     margin: auto;
                     margin-bottom: 1%;
                     padding-bottom: 2%;

@@ -10,7 +10,7 @@ import { InMemoryDataService }  from './in-memory-data.service';
 
 import { EffectComponent } from './effect.component';
 import { IngredientComponent } from './ingredient.component';
-import { IngredientsComponent } from './ingredients.component';
+import { MixtureComponent } from './mixture.component';
 import { IngredientService } from './ingredient.service';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { IngredientService } from './ingredient.service';
     AppComponent,
     EffectComponent,
     IngredientComponent,
-    IngredientsComponent,
+    MixtureComponent,
   ],
   providers: [
     IngredientService

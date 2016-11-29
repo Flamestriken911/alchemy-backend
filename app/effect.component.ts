@@ -7,12 +7,15 @@ import {IngredientService} from './ingredient.service'
 
 @Component({
     selector: 'effect',
-    template: ` <div [class.discovered]="effect.isDiscovered"
+    template: ` <div 
+                [class.discovered]="effect.isDiscovered"
+                [class.willHaveEffect]="effect.willHaveEffect"
+                [class.willBeDiscovered]="effect.willBeDiscovered"
                 (click)="updateDiscovery(effect); $event.stopPropagation()">
                     {{effect.name}}
                 </div>`,
-    styles: [
-                `div {
+    styles: [   `
+                div {
                     background-color: #607393;
                     border-radius: 50px;
                     color: white;
@@ -25,7 +28,28 @@ import {IngredientService} from './ingredient.service'
                 .discovered {
                     background-color: white;
                     color: black;
-                }`
+                }
+                div.willHaveEffect {
+                    background-color: yellow;
+                    color: black;
+                }
+                div.willBeDiscovered {
+                    background-color: green;
+                    color: black;
+                }
+                div.willBeDiscovered.willHaveEffect {
+                    background-color: green;
+                    color: black;
+                }
+                div.willBeDiscovered.discovered {
+                    background-color: white;
+                    color: black;
+                }
+                div.willBeDiscovered.discovered.willHaveEffect {
+                    background-color: yellow;
+                    color: black;
+                }
+                `
             ],
 })
 

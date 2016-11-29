@@ -19,10 +19,34 @@ export class IngredientService {
                     .catch(this.handleError);
     }
 
+    getMatches(ingredients: Ingredient[]): Promise<[Ingredient[]]> {
+        //the request url will have querystring parameters of the ingredient ids
+        // const url = `${this.ingredientsUrl}/get-matches?${ingredients.map((ing) => ing.id).join('&')}`;
+        return this.http.get(this.ingredientsUrl)
+                    .toPromise()
+                    .then(response => response.json().data as Ingredient[])
+                    //TODO: Remove once we have an actual back-end that does this filtering for us
+                    .then(response => [
+                        response.filter(
+                        (ing) => ingredients.map(
+                            (ingredient) => ingredient.id
+                        ).some((id) => id === ing.id)),
+                        response.filter(
+                        (ing) => !ingredients.map(
+                            (ingredient) => ingredient.id
+                        ).some((id) => id === ing.id))
+                    ])
+                    .catch(this.handleError);
+    }
+
     updateEffectDiscovery(ingredient: Ingredient, effectName: string, value: boolean): Promise<Ingredient> {
         const url = `${this.ingredientsUrl}/${ingredient.id}`;
         ingredient.effects[ingredient.effects.findIndex(ef => ef.name === effectName)].isDiscovered = value;
-        var newIngredient: Ingredient = {name: ingredient.name, id: ingredient.id, effects: ingredient.effects};
+        var newIngredient: Ingredient = {
+            name: ingredient.name, 
+            id: ingredient.id, 
+            effects: ingredient.effects,
+        };
         return this.http
             .put(url, JSON.stringify(newIngredient), {headers: this.headers})
             .toPromise()

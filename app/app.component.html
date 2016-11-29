@@ -1,0 +1,8 @@
+<mixture [ingredients]="mixtureIngredients" [deselectAction]="getMatches"></mixture>
+<hr>
+<div class="ingredient-wrapper" *ngFor="let ingredient of ingredients">
+    <my-ingredient [ingredient]=ingredient
+    (click)="selectIngredient(ingredient)"
+    >
+    </my-ingredient> 
+</div>

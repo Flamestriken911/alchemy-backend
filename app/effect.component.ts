@@ -8,7 +8,7 @@ import {IngredientService} from './ingredient.service'
 @Component({
     selector: 'effect',
     template: ` <div 
-                [class.discovered]="effect.isDiscovered"
+                [class.discovered]="effect.discovered"
                 [class.willHaveEffect]="effect.willHaveEffect"
                 [class.willBeDiscovered]="effect.willBeDiscovered"
                 (click)="updateDiscovery(effect); $event.stopPropagation()">
@@ -62,6 +62,6 @@ export class EffectComponent {
     updateDiscovery(effect: Effect): void {
         //TODO: figure out how to let the EffectComponent class handle this
         //or how to access the current 'discovered' value
-        this.ingredientService.updateEffectDiscovery(this.ingredient, this.effect.name, !this.effect.isDiscovered);
+        this.ingredientService.updateEffectDiscovery(this.ingredient, this.effect.name, !this.effect.discovered);
     }
 }

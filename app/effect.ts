@@ -1,6 +1,6 @@
 export class Effect {
     name: string;
-    isDiscovered: boolean;
+    discovered: boolean;
     willBeDiscovered: boolean;
     willHaveEffect: boolean;
 }

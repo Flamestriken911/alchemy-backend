@@ -38,7 +38,7 @@ export class IngredientService {
     updateEffectDiscovery(ingredient: Ingredient, effectName: string, value: boolean): Promise<Ingredient> {
         const url = `${this.ingredientsUrl}/${ingredient.id}`;
         //TODO: remove part below once we have a real server
-        ingredient.effects[ingredient.effects.findIndex(ef => ef.name === effectName)].isDiscovered = value;
+        ingredient.effects[ingredient.effects.findIndex(ef => ef.name === effectName)].discovered = value;
         var newIngredient: Ingredient = {
             name: ingredient.name, 
             id: ingredient.id, 

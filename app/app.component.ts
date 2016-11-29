@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
           if(ingredient.effects.some((newEffect) => newEffect.name === effect.name)) {
             if(!effect.willHaveEffect) this.mixtureEffects.push(effect.name);
             effect.willHaveEffect = true;
-            effect.willBeDiscovered = !effect.isDiscovered ? true : false;
+            effect.willBeDiscovered = !effect.discovered ? true : false;
           }
         })
       }

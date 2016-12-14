@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
   }
 
   getIngredients(): void {
-    this.ingredientService.getIngredients().then(ingredients => this.ingredients = ingredients);
+    this.ingredientService.getIngredients().then().then(ingredients => {console.log(ingredients);this.ingredients = ingredients});
   }
 
   //Gets matches for ingredients in mixture (returns default list if mixture empty)

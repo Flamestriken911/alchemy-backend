@@ -7,15 +7,17 @@ import {Ingredient} from './ingredient';
 @Injectable()
 
 export class IngredientService {
-    private ingredientsUrl = 'app/ingredients';
+    private user = 'cte';
+    private ingredientsUrl = `http://localhost:3001/${this.user}/ingredients`;
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http){}
 
     getIngredients(): Promise<Ingredient[]> {
+        console.log(this.ingredientsUrl);
         return this.http.get(this.ingredientsUrl)
                     .toPromise()
-                    .then(response => response.json().data as Ingredient[])
+                    .then(response => response.json() as Ingredient[])
                     .catch(this.handleError);
     }
 

@@ -17,7 +17,7 @@ import { IngredientService } from './ingredient.service';
   imports:      [ 
     BrowserModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    // InMemoryWebApiModule.forRoot(InMemoryDataService),
   ],
   declarations: [
     AppComponent,
